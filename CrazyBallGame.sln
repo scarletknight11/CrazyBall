@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazyBallGame.Plugins", "CrazyBallGame.Plugins.csproj", "{CEE4318A-F02C-E1DB-9355-42ED44D6AAD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazyBallGame", "CrazyBallGame.csproj", "{DC790711-5814-DEEC-229E-3BC05B469B01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazyBallGame.Editor.Plugins", "CrazyBallGame.Editor.Plugins.csproj", "{3DF07D8D-8306-95E4-77BE-29CBE7041F95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazyBallGame.Editor", "CrazyBallGame.Editor.csproj", "{B4C667CA-C0C1-9D97-FC84-486D4DB46C8B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEE4318A-F02C-E1DB-9355-42ED44D6AAD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEE4318A-F02C-E1DB-9355-42ED44D6AAD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEE4318A-F02C-E1DB-9355-42ED44D6AAD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEE4318A-F02C-E1DB-9355-42ED44D6AAD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC790711-5814-DEEC-229E-3BC05B469B01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC790711-5814-DEEC-229E-3BC05B469B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC790711-5814-DEEC-229E-3BC05B469B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC790711-5814-DEEC-229E-3BC05B469B01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF07D8D-8306-95E4-77BE-29CBE7041F95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF07D8D-8306-95E4-77BE-29CBE7041F95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF07D8D-8306-95E4-77BE-29CBE7041F95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF07D8D-8306-95E4-77BE-29CBE7041F95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4C667CA-C0C1-9D97-FC84-486D4DB46C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4C667CA-C0C1-9D97-FC84-486D4DB46C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4C667CA-C0C1-9D97-FC84-486D4DB46C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4C667CA-C0C1-9D97-FC84-486D4DB46C8B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

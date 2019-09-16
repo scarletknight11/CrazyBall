@@ -1,0 +1,142 @@
+{
+    "name": "Default Parameters",
+    "categories": {
+        "Gameplay": [
+            {
+                "strings": [
+                    "Arms",
+				    "Legs"
+                ],
+                "value_": "Arms",
+                "name": "Suki type",
+                "alias": "Motion Tracking Category",
+                "description": "Category of motion tracking mode.",
+                "$type": "StringListParameter",
+                "$id": "3"
+            },
+            {
+                "strings": [
+                    "default.suki",
+					"arms\\L_Arm2dof.suki",
+					"arms\\R_Arm2DOF.suki",
+					"arms\\l_shoulderabduction.suki",
+					"arms\\r_shoulderabduction.suki",
+					"legs\\Lleghvkick.suki",
+                    "legs\\Rleghvkick.suki"
+                ],
+                "value_": "default.suki",
+                "name": "Suki file",
+                "alias": "Motion Tracking Mode",
+                "description": "Which body motion to track to control the game.",
+                "$type": "StringListParameter",
+                "$id": "5"
+            },
+            {
+                "value_": true,
+                "gameObjectsToactivateName": null,
+                "name": "Enable Suki Extents",
+                "alias": "Custom Range of Motion",
+                "description": "Use player's Range Of Motion instead of default for Body Tracking Mode.",
+                "$type": "BoolParameter",
+                "$id": "9"
+            },	
+            {
+                "min_": 1.0,
+                "max_": 300.0,
+                "value_": 5.0,
+                "tick_": 1.0,
+                "name": "Game Length",
+                "alias": "Game Length",
+                "description": "The number of seconds to play in a game session",
+                "$type": "RangeParameter",
+                "$id": "6"
+            },
+            {
+                "min_": 0.4,
+                "max_": 1.0,
+                "value_": 0.4,
+                "tick_": 0.1,
+                "name": "Player Starting Speed",
+                "alias": "Player Starting Speed",
+                "description": "Starting speed for the player",
+                "$type": "RangeParameter",
+                "$id": "7"
+            },			
+			{
+                "min_": 0.5,
+                "max_":2.0,
+                "value_":1.25,
+                "tick_":.05,
+                "name": "Enemy Speed",
+                "alias": "Enemy Speed",
+                "description": "Speed of Enemy",
+                "$type": "RangeParameter",
+                "$id": "12"
+            },
+		    {
+                "min_": 0.5,
+                "max_":3.0,
+                "value_":1.0,
+                "tick_":.5,
+                "name": "Clone Interval",
+                "alias": "Clone Interval",
+                "description": "Speed of Clone",
+                "$type": "RangeParameter",
+                "$id": "11"
+            },
+ 		    {
+                "min_": 0.1,
+                "max_":1.0,
+                "value_":0.3,
+                "tick_":.1,
+                "name": "Ball Size",
+                "alias": "Ball Size",
+                "description": "Size of Ball",
+                "$type": "RangeParameter",
+                "$id": "14"
+            },
+			{
+                "min_": 1,
+                "max_":10,
+                "value_":1.0,
+                "tick_":1,
+                "name": "Lives",
+                "alias": "Lives",
+                "description": "Health",
+                "$type": "RangeParameter",
+                "$id": "13"
+            }
+			
+        ]
+    },
+    "parameters": {
+		"Enemy Speed": {
+			"$ref":"12"
+		},
+        "Clone Interval": {
+            "$ref": "11"
+        },
+		   "Ball Size": {
+            "$ref": "14"
+        },   
+		"Lives": {
+            "$ref": "13"
+        },
+        "Player Starting Speed": {
+            "$ref": "7"
+        },
+        "Suki type": {
+            "$ref": "3"
+        },
+		"Game Length": {
+            "$ref": "6"
+        },	
+	 
+        "Suki file": {
+            "$ref": "5"
+        },
+        "Enable Suki Extents": {
+            "$ref": "9"
+        }
+    }
+}

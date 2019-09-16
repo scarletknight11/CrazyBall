@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 31fb9230d10f84116b34fc933b590196
+timeCreated: 1498681149
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - title: {instanceID: 0}
+  - BoolWidgetPrefab: {fileID: 121656, guid: d7a67f82911e5449789549962a5669fc, type: 2}
+  - RangeWidgetPrefab: {fileID: 190970, guid: 0ab4169aa0e1143b98dde443c8e8c9f4, type: 2}
+  - StringListPrefab: {fileID: 182284, guid: 1876cc0ecb00d42c5b2681691707aa98, type: 2}
+  - CategoryPrefab: {fileID: 106578, guid: eea18df5b2ce44d599cd2ef470e5f3a1, type: 2}
+  - scrollViewRoot: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,255 @@
+﻿using UnityEngine;
+using System.Collections;
+/**
+ * Draws PieChart mesh for @sa Protractor.
+ */
+public class PieChartMesh : MonoBehaviour
+{
+
+	float[] mData;
+
+	int mSlices;
+	float mRotationAngle;
+	float mRadius;
+	Material[] mMaterials;
+
+	Vector3[] mVertices;
+	Vector3[] mNormals;
+	Vector3 mNormal = new Vector3(0f, 0f, -1f);
+	Vector2[] mUvs;
+	int[] mTriangles;
+	MeshRenderer mMeshRenderer;
+	MeshFilter mMeshFilter;
+	Mesh mesh; 
+	float delay=0.0f;
+
+	public void Init(float[] data, int slices, float rotatioAngle, float radius, Material[] materials, float speed)
+	{
+		mData = data;
+		mSlices = slices;
+		mRotationAngle = rotatioAngle;
+		mRadius = radius;
+		delay = speed;
+
+		// Get Mesh Renderer
+		mMeshRenderer = gameObject.GetComponent("MeshRenderer") as MeshRenderer;
+		if (mMeshRenderer == null)
+		{
+			gameObject.AddComponent<MeshRenderer>();
+			mMeshRenderer = gameObject.GetComponent("MeshRenderer") as MeshRenderer;
+		}
+		// Get Mesh Filter
+		mMeshFilter = gameObject.GetComponent("MeshFilter") as MeshFilter;
+		if (mMeshFilter == null)
+		{
+			gameObject.AddComponent<MeshFilter>();
+			mMeshFilter = gameObject.GetComponent("MeshFilter") as MeshFilter;
+		}
+
+		mMeshRenderer.materials = materials;
+
+		mMaterials = materials;
+
+
+		Init(data);
+	}
+
+	public void Init(float[] data)
+	{
+		mSlices = 360;
+		mRotationAngle = 90f;
+		mRadius = 0.3f;
+
+		mData = data;
+		// Init vertices and triangles arrays
+		mVertices = new Vector3[mSlices * 3];
+		mNormals = new Vector3[mSlices * 3];
+		mUvs = new Vector2[mSlices * 3];
+		mTriangles = new int[mSlices * 3];
+		mesh = ((MeshFilter)GetComponent("MeshFilter")).mesh;
+
+		mesh.Clear();
+
+		mesh.name = "Pie Chart Mesh";
+		// Generate mesh with slices (vertices and triangles)
+		for (int i = 0; i < mSlices; i++)
+		{
+			mVertices[i * 3 + 0] = new Vector3(0f, 0f, 0f);
+			mVertices[i * 3 + 1] = new Vector3(0f, 0f, 0f);
+			mVertices[i * 3 + 2] = new Vector3(0f, 0f, 0f);
+
+			mNormals[i * 3 + 0] = mNormal;
+			mNormals[i * 3 + 1] = mNormal;
+			mNormals[i * 3 + 2] = mNormal;
+
+			mTriangles[i * 3 + 0] = i * 3 + 0;
+			mTriangles[i * 3 + 1] = i * 3 + 1;
+			mTriangles[i * 3 + 2] = i * 3 + 2;
+		}
+
+
+	}
+
+	public void Draw(float[] data)
+	{
+		mData = data;
+		//StopAllCoroutines ();
+		StartCoroutine(Draw());
+	}
+
+	public IEnumerator Draw()
+	{
+		//print ("PieChart Draw 0");
+		//Check data validity for pie chart...
+		while  (mData == null)
+		{
+			print("PieChart: Data null");
+			yield return null;
+		}
+
+		for (int i = 0; i < mData.Length; i++)
+		{
+			if (mData[i] < 0)
+			{
+				print("PieChart: Data < 0");
+				yield return null;
+			}
+		}
+
+		// Calculate sum of data values
+		float sumOfData = 0;
+		foreach (float value in mData)
+		{
+			sumOfData += value;
+		}
+		if (sumOfData <= 0)
+		{
+			print("PieChart: Data sum <= 0");
+			yield return null;
+		}
+		// Determine how many triangles in slice
+		int[] slice = new int[mData.Length];
+		int numOfTris = 0;
+		int numOfSlices = 0;
+		int countedSlices = 0;
+
+		// Caluclate slice size
+		for (int i = 0; i < mData.Length; i++)
+		{
+			numOfTris = (int)((mData[i] / sumOfData) * mSlices);
+			slice[numOfSlices++] = numOfTris;
+			countedSlices += numOfTris;
+		}
+		// Check that all slices are counted.. if not -> add/sub to/from biggest slice..
+		int idxOfLargestSlice = 0;
+		int largestSliceCount = 0;
+		for (int i = 0; i < mData.Length; i++)
+		{
+			if (largestSliceCount < slice[i])
+			{
+				idxOfLargestSlice = i;
+				largestSliceCount = slice[i];
+			}
+		}
+
+		// Check validity for pie chart
+		if (countedSlices == 0)
+		{
+			print("PieChart: Slices == 0");
+			yield return null;
+		}
+
+		// Adjust largest dataset to get proper slice
+		slice[idxOfLargestSlice] += mSlices - countedSlices;
+
+		// Check validity for pie chart data
+		if (slice[idxOfLargestSlice] <= 0)
+		{
+			print("PieChart: Largest pie <= 0");
+			yield return null;
+		}
+
+		//gameObject.AddComponent("MeshFilter");
+		//gameObject.AddComponent("MeshRenderer");
+
+
+		// Roration offset (to get star point to "12 o'clock")
+		float rotOffset = mRotationAngle / 360f * 2f * Mathf.PI;
+
+		// Calc the points in circle
+		float angle;
+		float[] x = new float[mSlices];
+		float[] y = new float[mSlices];
+
+		for (int i = 0; i < mSlices; i++)
+		{
+			angle = i * 2f * Mathf.PI / mSlices;
+			x[i] = (Mathf.Cos(angle + rotOffset) * mRadius);
+			y[i] = (Mathf.Sin(angle + rotOffset) * mRadius);
+		}
+
+		// Generate mesh with slices (vertices and triangles)
+		for (int i = 0; i < mSlices; i++)
+		{
+			mVertices[i * 3 + 0] = new Vector3(0f, 0f, 0f);
+			mVertices[i * 3 + 1] = new Vector3(x[i], y[i], 0f);
+			// This will ensure that last vertex = first vertex..
+			mVertices[i * 3 + 2] = new Vector3(x[(i + 1) % mSlices], y[(i + 1) % mSlices], 0f);
+
+			mUvs[i * 3 + 0] = new Vector2(0f, 0f);
+			mUvs[i * 3 + 1] = new Vector2(x[i], y[i]);
+			// This will ensure that last uv = first uv..
+			mUvs[i * 3 + 2] = new Vector2(x[(i + 1) % mSlices], y[(i + 1) % mSlices]);
+
+		}
+
+
+		// Assign verts, norms, uvs and tris to mesh and calc normals
+		mesh.vertices = mVertices;
+		mesh.normals = mNormals;
+		mesh.uv = mUvs;
+		//mesh.triangles = triangles;
+
+		mesh.subMeshCount = mData.Length;
+
+		int[][] subTris = new int[mData.Length][];
+
+		countedSlices = 0;
+
+		// Set sub meshes
+		for (int i = 0; i < mData.Length; i++)
+		{
+			// Every triangle has three veritces..
+			subTris[i] = new int[slice[i] * 3];
+
+			// Add tris to subTris
+			for (int j = 0; j < slice[i]; j++)
+			{
+				subTris[i][j * 3 + 0] = mTriangles[countedSlices * 3 + 0];
+				subTris[i][j * 3 + 1] = mTriangles[countedSlices * 3 + 1];
+				subTris[i][j * 3 + 2] = mTriangles[countedSlices * 3 + 2];
+
+//				if ( j%5 == 0 )
+//					yield return new WaitForSeconds(delay);
+
+				mesh.SetTriangles(subTris[i], i);
+				countedSlices++;
+			}
+
+		}
+		//print ("PieChart Draw 1");
+
+	}
+
+	// Properties
+	public float[] Data { get { return mData; } set { mData = value; } }
+
+	public int Slices { get { return mSlices; } set { mSlices = value; } }
+
+	public float RotationAngle { get { return mRotationAngle; } set { mRotationAngle = value; } }
+
+	public float Radius { get { return mRadius; } set { mRadius = value; } }
+
+	public Material[] Materials { get { return mMaterials; } set { mMaterials = value; } }
+
+}
