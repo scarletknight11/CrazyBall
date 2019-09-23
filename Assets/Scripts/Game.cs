@@ -232,12 +232,35 @@ public class Game : MonoBehaviour
         PlayerObject.transform.localPosition = pos;
     }
 
+ //   public void PauseGame()
+ //   {
+ //       print("Game is Paused...");
+ //       isPaused = true;
+ //       Time.timeScale = 0;
+ //       Time.fixedDeltaTime = 0;
+ //       AudioListener.volume = 0;
+ //   }
+
+ //   /// <summary>
+ //   /// Unpauses game time and audio
+ //   /// </summary>
+	//public void UnPauseGame()
+ //   {
+ //       print("Unpause");
+ //       isPaused = false;
+ //       Time.timeScale = 1.0f;
+ //       Time.fixedDeltaTime = 0.02f;
+ //       AudioListener.volume = 1.0f;
+ //   }
+
     public void PauseGame()
     {
-        print("Game is Paused...");
+        //print("Game is Paused...");
         isPaused = true;
+        startTime = 0f;
         Time.timeScale = 0;
-        Time.fixedDeltaTime = 0;
+        //Time.fixedDeltaTime = 0;
+        startTime = Time.deltaTime;
         AudioListener.volume = 0;
     }
 
@@ -246,7 +269,7 @@ public class Game : MonoBehaviour
     /// </summary>
 	public void UnPauseGame()
     {
-        print("Unpause");
+        //print("Unpause");
         isPaused = false;
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = 0.02f;

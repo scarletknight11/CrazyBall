@@ -5,7 +5,7 @@
             {
                 "strings": [
                     "Arms",
-				    "Legs"
+				    "Balance"
                 ],
                 "value_": "Arms",
                 "name": "Suki type",
@@ -19,10 +19,7 @@
                     "default.suki",
 					"arms\\L_Arm2dof.suki",
 					"arms\\R_Arm2DOF.suki",
-					"arms\\l_shoulderabduction.suki",
-					"arms\\r_shoulderabduction.suki",
-					"legs\\Lleghvkick.suki",
-                    "legs\\Rleghvkick.suki"
+					"balance\\WeightShifting.suki"
                 ],
                 "value_": "default.suki",
                 "name": "Suki file",
