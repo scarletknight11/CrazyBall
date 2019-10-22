@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class scroll : MonoBehaviour {
 
-    public float speed = 0.4f;
+    private Rigidbody2D RIGIDBODY;
+    private float speed = -1.5f;
+    [SerializeField] private bool stopScrolling;
 	// Use this for initialization
 	void Start () {
-		
+        RIGIDBODY = GetComponent<Rigidbody2D>();
+        RIGIDBODY.velocity = new Vector2(0, speed);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Vector2 offset = new Vector2(0, Time.time * speed);
 
-        GetComponent<Renderer>();
+        if (stopScrolling)
+        {
+            RIGIDBODY.velocity = Vector2.zero;
+        }
+        else
+        { 
+            RIGIDBODY.velocity = new Vector2(0, speed);
+        }
 
 	}
 }
